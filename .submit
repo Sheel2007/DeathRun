@@ -1,0 +1,11 @@
+# Submit server .submit file for
+#  Course CMSC132_03
+#  Project P4: Your Game Implementation
+
+courseName=CMSC132_03
+semester=202601
+projectNumber=P4
+courseKey=501250e1b62d63fe
+authentication.type=cas
+baseURL=https://submit.cs.umd.edu:443/spring2026
+submitURL=https://submit.cs.umd.edu:443/spring2026/eclipse/SubmitProjectViaEclipse
