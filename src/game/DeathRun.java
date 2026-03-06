@@ -12,6 +12,11 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.awt.Point;
 
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 class DeathRun extends Game {
 
 	private enum GameState {
@@ -46,6 +51,8 @@ class DeathRun extends Game {
 		  private boolean leftPressed = false;
 		  private boolean rightPressed = false;
 		  private boolean jumpPressed = false;
+		  
+		  private Clip menuMusic;
 
 		  public DeathRun() {
 		    super("Death Run!",800,600);
@@ -65,6 +72,17 @@ class DeathRun extends Game {
 		    initInput();
 		    initPlatform();
 		    initObstacles();
+		    
+		    // play menu music once (bare bones)
+		    try {
+		      File soundFile = new File("src/game/music/game_start.wav");
+		      AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+		      menuMusic = AudioSystem.getClip();
+		      menuMusic.open(audioIn);
+		      menuMusic.start();
+		    } catch (Exception e) {
+		      e.printStackTrace();
+		    }
 		  }
 
 		  private void initPlayer() {
@@ -101,7 +119,12 @@ class DeathRun extends Game {
 		        } else if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) {
 		          rightPressed = true;
 		        } else if (code == KeyEvent.VK_UP || code == KeyEvent.VK_SPACE) {
-		          jumpPressed = true;
+		          if (!jumpPressed) {
+		            jumpPressed = true;
+		            if (currentState == GameState.PLAYING && player != null && player.isOnGround()) {
+		              player.setVy(JUMP_STRENGTH);
+		            }
+		          }
 		        }
 		      }
 		      
@@ -141,7 +164,7 @@ class DeathRun extends Game {
 		      }
 		    });
 		  }
-
+		  
 		  private void startGameForDifficulty() {
 		    switch (selectedDifficulty) {
 		      case EASY:
@@ -229,9 +252,6 @@ class DeathRun extends Game {
 		      }
 		      if (rightPressed) {
 		        vx += MOVE_SPEED;
-		      }
-		      if (jumpPressed && player.isOnGround()) {
-		        player.setVy(JUMP_STRENGTH);
 		      }
 
 		      player.setVx(vx);
@@ -428,5 +448,5 @@ class DeathRun extends Game {
 			        currentState = GameState.MENU;
 			    }
 			}
-
+		  
 }
