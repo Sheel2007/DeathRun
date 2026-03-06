@@ -20,7 +20,7 @@ import javax.sound.sampled.Clip;
 class DeathRun extends Game {
 
 	private enum GameState {
-		    MENU, PLAYING, GAME_OVER
+		    MENU, PLAYING, GAME_OVER, WIN
 		  }
 
 		  private enum Difficulty {
@@ -40,6 +40,7 @@ class DeathRun extends Game {
 		  private DifficultyButton easyButton, mediumButton, hardButton;
 		  private MenuButton playButton;
 		  private PlayAgainButton playAgainButton;
+		  private Coin coin;
 
 		  private Player player;
 		  private double floorY;
@@ -178,6 +179,8 @@ class DeathRun extends Game {
 		        break;
 		    }
 		    initPlayer();
+		    // place the win coin near the top of the screen
+		    coin = new Coin(width / 2 - 15, 60, 30);
 		    currentState = GameState.PLAYING;
 		  }
 
@@ -214,6 +217,9 @@ class DeathRun extends Game {
 		        break;
 		      case GAME_OVER:
 		        paintGameOver(brush);
+		        break;
+		      case WIN:
+		        paintWin(brush);
 		        break;
 		    }
 		  }
@@ -356,6 +362,15 @@ class DeathRun extends Game {
 		        }
 		    }
 		    
+		    // draw the goal coin and check for win
+		    if (coin != null) {
+		      coin.draw(brush);
+		      if (player != null && player.getBounds().intersects(coin.getBounds())) {
+		        currentState = GameState.WIN;
+		        return;
+		      }
+		    }
+		    
 		    brush.setColor(Color.white);
 		    brush.setFont(new Font("Monospace", Font.PLAIN, 16));
 		    brush.drawString("Lives: " + lives, 10, 20);
@@ -377,6 +392,21 @@ class DeathRun extends Game {
 		    brush.drawString("Lives remaining: 0", width / 2 - 80, 270);
 		    brush.drawString("High Score: ", width / 2 - 80, 300);
 		    playAgainButton.draw(brush, true);
+		  }
+
+		  // display win screen when the player reaches the coin
+		  private void paintWin(Graphics brush) {
+		    brush.setColor(Color.black);
+		    brush.fillRect(0, 0, width, height);
+
+		    brush.setColor(Color.green);
+		    brush.setFont(new Font("Monospace", Font.BOLD, 32));
+		    brush.drawString("You Won!", width / 2 - 90, 220);
+
+		    brush.setColor(Color.white);
+		    brush.setFont(new Font("Monospace", Font.PLAIN, 18));
+		    brush.drawString("Difficulty: " + selectedDifficulty.name(), width / 2 - 80, 260);
+		    brush.drawString("Nice job reaching the coin.", width / 2 - 150, 290);
 		  }
 
 			public static void main (String[] args) {
