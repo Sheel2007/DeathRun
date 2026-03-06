@@ -73,7 +73,7 @@ class DeathRun extends Game {
 		    initPlatform();
 		    initObstacles();
 		    
-		    // play menu music once (bare bones)
+		    // play the startup music
 		    try {
 		      File soundFile = new File("src/game/music/game_start.wav");
 		      AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
@@ -255,7 +255,7 @@ class DeathRun extends Game {
 		      }
 
 		      player.setVx(vx);
-		      player.update(GRAVITY, floorY, width);
+		      
 		      player.draw(brush);
 		      
 		      // check horizontal collisions 
@@ -268,6 +268,8 @@ class DeathRun extends Game {
 		              }
 		          }
 		       }
+		      
+		      player.update(GRAVITY, floorY, width);
 
 		       player.setVy(player.getVy() + GRAVITY);
 		       player.setY(player.getY() + player.getVy());
