@@ -12,6 +12,14 @@ public class Platform implements Collidable {
         this.bounds = new Rectangle(x, y, width, height);
     }
 
+    /**
+     * Draws the polygon onto the provided graphics context.
+     *
+     * draws a rectangle with a light gray fill and a white 
+     * outline using the coordinates from the constructor.
+     *
+     * @param g 
+     */
     public void draw(Graphics g) {
         g.setColor(Color.GRAY);
         g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
@@ -19,6 +27,9 @@ public class Platform implements Collidable {
         g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
     }
 
+    /**
+     * gets the coordinates for this rectangle.
+     */
 	@Override
 	public Rectangle getBounds() {
 		return this.bounds;
