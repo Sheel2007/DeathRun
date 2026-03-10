@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 
 public class Platform implements Collidable {
 
-	private Rectangle bounds;
+    private Rectangle bounds;
 
     public Platform(int x, int y, int width, int height) {
         this.bounds = new Rectangle(x, y, width, height);
@@ -15,10 +15,10 @@ public class Platform implements Collidable {
     /**
      * Draws the polygon onto the provided graphics context.
      *
-     * draws a rectangle with a light gray fill and a white 
+     * draws a rectangle with a light gray fill and a white
      * outline using the coordinates from the constructor.
      *
-     * @param g 
+     * @param g
      */
     public void draw(Graphics g) {
         g.setColor(Color.GRAY);
@@ -30,10 +30,8 @@ public class Platform implements Collidable {
     /**
      * gets the coordinates for this rectangle.
      */
-	@Override
-	public Rectangle getBounds() {
-		return this.bounds;
-	}
+    @Override
+    public Rectangle getBounds() {
+        return this.bounds;
+    }
 }
-
-

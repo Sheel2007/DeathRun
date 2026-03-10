@@ -28,4 +28,3 @@ public class Coin implements Collidable {
     return new Rectangle(x, y, size, size);
   }
 }
-

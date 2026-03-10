@@ -38,7 +38,7 @@ abstract class Obstacle extends Polygon {
 	 * Retrieves a list of points and initializes an array for xPts and yPts
 	 * to prepare for rendering
 	 * 
-	 * @param  brush 
+	 * @param brush 
 	 */
 	public void draw(Graphics brush) {
         pts = getPoints();
