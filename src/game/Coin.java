@@ -16,6 +16,13 @@ public class Coin implements Collidable {
     this.size = size;
   }
 
+  /**
+   * Draws the coin on the top of the window.
+   *
+   * The coin is a gold circle with an orange outline.
+   *
+   * @param g the Graphics object used for drawing
+   */
   public void draw(Graphics g) {
     g.setColor(new Color(255, 215, 0)); // gold
     g.fillOval(x, y, size, size);
@@ -23,6 +30,13 @@ public class Coin implements Collidable {
     g.drawOval(x, y, size, size);
   }
 
+  /**
+   * Returns a collision boundary of the coin.
+   *
+   * This is used to detect collisions with other objects.
+   *
+   * @return a Rectangle representing the coin's bounds
+   */
   @Override
   public Rectangle getBounds() {
     return new Rectangle(x, y, size, size);

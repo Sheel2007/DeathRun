@@ -3,7 +3,7 @@ package game;
 /*
 CLASS: Game
 DESCRIPTION: A painted canvas in its own window, updated every tenth second.
-USAGE: Extended by YourGameName.
+USAGE: Extended by DeathRun.
 NOTE: You don't need to understand the details here, no fiddling neccessary.*/
 import java.awt.*;
 import java.awt.event.*;

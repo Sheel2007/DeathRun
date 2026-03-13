@@ -85,7 +85,7 @@ class DeathRun extends Game {
 			e.printStackTrace();
 		}
 	}
-
+	
 	private void initPlayer() {
 		int playerWidth = 40;
 		int playerHeight = 60;
@@ -184,6 +184,14 @@ class DeathRun extends Game {
 		currentState = GameState.PLAYING;
 	}
 
+	/**
+	 * Returns the collision bounds of the player.
+	 * 
+	 * If the player does not exist, it returns 
+	 * an empty rectangle.
+	 *
+	 * @return a Rectangle representing the player's bounds
+	 */
 	public Rectangle getPlayerBounds() {
 		if (player == null) {
 			return new Rectangle(0, 0, 0, 0);
@@ -191,6 +199,13 @@ class DeathRun extends Game {
 		return player.getBounds();
 	}
 
+	/**
+	 * Decreases the player's life count when they hit an obstacle.
+	 * 
+	 * If the player has no remaining lives, the game state
+	 * changes to GAME_OVER. Otherwise the player is reset
+	 * to the starting position.
+	 */
 	public void loseLife() {
 		if (currentState != GameState.PLAYING) {
 			return;
@@ -203,10 +218,24 @@ class DeathRun extends Game {
 		}
 	}
 
+	/**
+	 * Returns the number of lives left.
+	 *
+	 * @return the player's lives left
+	 */
 	public int getLives() {
 		return lives;
 	}
 
+	/**
+	 * Drawing method for the game.
+	 * 
+	 * Depending on the current game state, this method
+	 * calls the appropriate paint method to draw the
+	 * menu, the actual game, the death screen, or win screen.
+	 *
+	 * @param brush the Graphics object used for drawing
+	 */
 	public void paint(Graphics brush) {
 		switch (currentState) {
 			case MENU:
@@ -409,6 +438,14 @@ class DeathRun extends Game {
 		brush.drawString("Nice job reaching the coin.", width / 2 - 150, 290);
 	}
 
+	/**
+	 * The main entry point of the program.
+	 * 
+	 * Launches the game window 
+	 * and creates a new DeathRun instance.
+	 *
+	 * @param args command line arguments
+	 */
 	public static void main(String[] args) {
 		// lambda function
 		EventQueue.invokeLater(() -> {
@@ -416,9 +453,14 @@ class DeathRun extends Game {
 			a.repaint();
 		});
 	}
-
-	// Inner class #1: generic menu button
+	/**
+	 * A generic button used in the game menu.
+	 * 
+	 * A MenuButton has a rectangular area and a text label.
+	 * It can detect mouse clicks and draw itself on the screen.
+	 */
 	private class MenuButton {
+		// Inner class #1: generic menu button
 		protected Rectangle box;
 		protected String label;
 
@@ -427,9 +469,25 @@ class DeathRun extends Game {
 			this.label = label;
 		}
 
+		/**
+		 * Checks if a point is inside the button's area.
+		 *
+		 * @param p the point to test
+		 * @return true if the point is inside the button
+		 */
 		boolean contains(Point p) {
 			return box.contains(p);
 		}
+
+		/**
+		 * Draws the button on the screen.
+		 *
+		 * The color changes depending on whether the
+		 * button is enabled or disabled.
+		 *
+		 * @param g the Graphics object used for drawing
+		 * @param enabled whether the button is selected (green)
+		 */
 
 		void draw(Graphics g, boolean enabled) {
 			g.setColor(enabled ? Color.darkGray : Color.gray);
@@ -442,8 +500,14 @@ class DeathRun extends Game {
 		}
 	}
 
-	// Inner class #2: difficulty button
+	
+	/**
+	 * A specialized menu button to select game difficulty.
+	 * 
+	 * Each button represents one difficulty level.
+	 */
 	private class DifficultyButton extends MenuButton {
+		// Inner class #2: difficulty button
 		private Difficulty difficulty;
 
 		DifficultyButton(Rectangle box, String label, Difficulty difficulty) {
@@ -451,6 +515,14 @@ class DeathRun extends Game {
 			this.difficulty = difficulty;
 		}
 
+		/**
+		 * Draws the difficulty button.
+		 *
+		 * The button changes color when it is selected.
+		 *
+		 * @param g the Graphics object used for drawing
+		 * @param selected true if this difficulty is selected
+		 */
 		void draw(Graphics g, boolean selected) {
 			if (selected) {
 				g.setColor(Color.green.darker());
@@ -465,17 +537,30 @@ class DeathRun extends Game {
 			g.drawString(label, box.x + 18, box.y + 28);
 		}
 
+		/**
+		 * Returns the difficulty associated with this button.
+		 *
+		 * @return the difficulty level
+		 */
 		Difficulty getDifficulty() {
 			return difficulty;
 		}
 	}
 
-	// Inner class #3: play again button
+	/**
+	 * A menu button that returns the game to the main menu
+	 * when clicked after a game over.
+	 */
 	private class PlayAgainButton extends MenuButton {
+		// Inner class #3: play again button
 		PlayAgainButton(Rectangle box, String label) {
 			super(box, label);
 		}
 
+		/**
+		 * Handles the button click action.
+		 * Resets the game state back to the main menu.
+		 */
 		void click() {
 			currentState = GameState.MENU;
 		}
