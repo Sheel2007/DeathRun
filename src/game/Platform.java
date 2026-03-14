@@ -4,6 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+/**
+ * Represents a platform that the player can stand on.
+ *
+ * The player can land on it and use them to
+ * move through the map.
+ */
 public class Platform implements Collidable {
 
     private Rectangle bounds;

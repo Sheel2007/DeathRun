@@ -3,6 +3,12 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * Represents a spike obstacle.
+ *
+ * Spikes make the player lose a life.
+ * Some spikes can also move.
+ */
 public class Spike extends Obstacle {
     private double deltaX = 2;
     private static final double MIN_X = 300;

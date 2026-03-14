@@ -1,8 +1,8 @@
 package game;
 
 /*
-CLASS: YourGameNameoids
-DESCRIPTION: Extending Game, YourGameName is all in the paint method.
+CLASS: DeathRun
+DESCRIPTION: Extending Game, DeathRun is all in the paint method.
 NOTE: This class is the metaphorical "main method" of your program,
       it is your control center.
 
@@ -17,6 +17,16 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+/**
+ * Main controller class for the game.
+ *
+ * Extends the Game framework and manages
+ * the menu navigation, the player movement
+ * and input, the obstacle updates, and 
+ * the collision handling.
+ *
+ * This class is the the control center of the program.
+ */
 class DeathRun extends Game {
 
 	private enum GameState {

@@ -4,6 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+/**
+ * The coin is the goal that the
+ * player has to get to win the game.
+ *
+ * The coin can be drawn and provides
+ * a collision boundary so the game can detect when
+ * the player gets it.
+ */
 public class Coin implements Collidable {
 
   private int x;

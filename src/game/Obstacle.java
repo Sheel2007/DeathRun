@@ -2,6 +2,14 @@ package game;
 
 import java.awt.Graphics;
 
+/**
+ * Represents an abstract obstacle.
+ *
+ * Obstacles are can move,
+ * rotate, or change position over time. 
+ * 
+ * Obstacles reset the player to the beginning.
+ */
 abstract class Obstacle extends Polygon {
 	protected int[] xPts;
 	protected int[] yPts;

@@ -4,6 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+/**
+ * Represents the player in the game.
+ *
+ * The Player handles movement and jumping.
+ * 
+ * It can also draw itself on the screen.
+ */
 public class Player implements Collidable {
 	private double x;
 	private double y;
